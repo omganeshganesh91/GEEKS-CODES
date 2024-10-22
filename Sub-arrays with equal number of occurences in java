@@ -1,0 +1,28 @@
+class Solution {
+
+   static int sameOccurrence(int arr[], int x, int y) {
+        // Map to store the count difference and its frequency
+        Map<Integer, Integer> mp = new HashMap<>();
+        int count = 0, ans = 0;
+
+        // Initialize the map with the count difference 0 (occurrence is equal at start)
+        mp.put(0, 1);
+
+        // Traverse the array
+        for (int i : arr) {
+            if (i == x)
+                count++; // Increase count if we find x
+            else if (i == y)
+                count--; // Decrease count if we find y
+
+            // If this count difference has been seen before, add the frequency to the answer
+            if (mp.containsKey(count)) {
+                ans += mp.get(count);
+            }
+
+            // Update the frequency of the current count difference
+            mp.put(count, mp.getOrDefault(count, 0) + 1);
+        }
+        return ans;
+    }
+}
